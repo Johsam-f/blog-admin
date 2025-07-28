@@ -21,8 +21,6 @@ function AdminDashboard() {
       });
       const data = await res.json();
       setPosts(data);
-      console.log("Fetched posts:", posts);
-      console.log("Fetched posts:", data);
     } catch (err) {
       console.error("Failed to fetch posts:", err);
     }
@@ -32,9 +30,6 @@ function AdminDashboard() {
     const { data: session } = await authClient.getSession(); // Built-in to BetterAuth
     if (!session?.user) {
       navigate("/login")
-    } else {
-      // logged in
-      console.log("User session:", session.user);
     }
   }
   
