@@ -2,13 +2,11 @@ import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import { Mail } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@/components/ui/button";
 
 function Signup() {
   const [errorMsg, setErrorMsg] = useState("");
-  const navigate = useNavigate();
   const [loading, setLoading] = useState<"google" | "github" | null>(null);
 
   const handleGoogleSignup = async () => {
@@ -16,7 +14,7 @@ function Signup() {
     try {
       await authClient.signIn.social({
         provider: "google",
-        callbackURL: "/dashboard",
+        callbackURL: "/adminDashboard",
       });
     } catch (error) {
       console.error(error);
@@ -30,17 +28,13 @@ function Signup() {
     try {
       await authClient.signIn.social({
         provider: "github",
-        callbackURL: "/dashboard",
+        callbackURL: "/adminDashboard",
       });
     } catch (error) {
       console.error(error);
       setErrorMsg("GitHub signup failed.");
       setLoading(null);
     }
-  };
-
-  const navigateToEmail = () => {
-    navigate("/emailSignUp");
   };
 
   return (
@@ -91,13 +85,9 @@ function Signup() {
         <div className="h-px flex-1 bg-gray-500"></div>
       </div>
 
-      <Button onClick={navigateToEmail} variant="secondary">
-        Create Account with Email <Mail className="ml-2" />
-      </Button>
-
       <div className="mt-4 text-gray-300">
         Have an account already?{" "}
-        <Link to={"/"} className="text-blue-600 hover:underline">
+        <Link to={"/login"} className="text-blue-600 hover:underline">
           Login
         </Link>
       </div>

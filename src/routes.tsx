@@ -1,16 +1,21 @@
 import Signup from "./pages/auth/signup";
 import ErrorPage from "./pages/errorPage";
-import Dashboard from "./pages/dashboard";
+import AdminDashboard from "./pages/dashboard";
+import Login from "./pages/auth/login";
 
 const routes = [
     {
       path: "/",
-      element: <Signup />,
+      element: <AdminDashboard />,
       errorElement: <ErrorPage/>
     },
     {
-      path: "/dashboard",
-      element: <Dashboard />,
+      path: "/signup",
+      element: <Signup />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
     },
   ]
 
