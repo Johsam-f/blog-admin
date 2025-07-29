@@ -1,8 +1,9 @@
 import { authClient } from "@/lib/auth-client";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import HeaderProfile from "@/components/headerProfile";
+import Button from "@/components/ui/button";
+import { LogOut } from "lucide-react";
 
 function AdminDashboard() {
   const [posts, setPosts] = useState([]);
@@ -87,19 +88,33 @@ function AdminDashboard() {
     }
   };
 
+  const signOut = async () => {
+    try {
+        const res = await authClient.signOut();
+        if(res.data?.success){
+            navigate("/login");
+        }
+    } catch (error) {
+        console.error("Sign out error:", error)
+    }
+  }
+
   return (
     <div className="min-h-screen text-white px-4 py-6">
       {/* Header */}
-      <header className="flex items-center justify-between mb-10">
-        <div className="w-12 h-12 rounded-full bg-white/10" />
+      <header className="flex items-center justify-between mb-2">
+            <Button
+                onClick={signOut}
+                variant='danger'
+            >
+                <LogOut className="p-1" />
+            </Button>
 
-        <h1 className="text-xl sm:text-2xl font-bold text-center flex-1 -ml-12">
-          Find All Blogs
-        </h1>
-
-        {/* Profile Picture */}
-        <HeaderProfile />
-      </header>
+                <h1 className="text-xl sm:text-2xl font-bold text-center -ml-12">
+                    Find All Blogs
+                </h1>
+                <HeaderProfile />
+          </header>
       <section className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Admin Dashboard</h1>
         <span className="text-gray-400">Find All Blogs</span>
