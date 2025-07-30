@@ -12,7 +12,7 @@ function AdminDashboard() {
   const [editingPostId, setEditingPostId] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const API_BASE_URL = "http://localhost:3000";
+  const API_BASE_URL = "https://blog-api-12dh.onrender.com";
   
 
   const fetchPosts = async () => {
